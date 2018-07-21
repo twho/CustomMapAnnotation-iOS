@@ -32,7 +32,7 @@ open class CustomActionSheetItem: NSObject {
     public var title: String?
     public var titleColor: UIColor = UIColor(red: 0, green: 0.47, blue: 1.0, alpha: 1.0) // Default color
     public var backgroundColor: UIColor = UIColor.white
-    public var backgroundTintColor: UIColor = ResManager.Color.gray
+    public var backgroundTintColor: UIColor = CMAResManager.Color.gray
     public var font: UIFont? = nil
     public var onClick: ((_ actionSheet: CustomActionSheet) -> Void)? = nil
     

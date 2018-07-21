@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class ResManager {
+open class CMAResManager {
     
     private static let LOG_TAG = "[CustomMapAnnotation ResManager] "
     

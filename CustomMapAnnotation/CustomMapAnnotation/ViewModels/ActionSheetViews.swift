@@ -115,7 +115,7 @@ open class AudioView: UIView {
         - fetchAudio:    Customized method for fetching audio data.
         - onClickRecord: Customized button click event.
      */
-    public func configure(title: String? = nil, subTitle: String? = nil, theme: ResManager.Theme = .dark, fetchAudio: @escaping audioViewFunction, onClickRecord: audioViewFunction? = nil) {
+    public func configure(title: String? = nil, subTitle: String? = nil, theme: CMAResManager.Theme = .dark, fetchAudio: @escaping audioViewFunction, onClickRecord: audioViewFunction? = nil) {
         self.fetchAudio = fetchAudio
         configure(title: title, subTitle: subTitle, theme: theme, audioData: fetchAudio, onClickRecord: onClickRecord)
     }
@@ -130,7 +130,7 @@ open class AudioView: UIView {
         - audioData:     The audio data to be used in audio action sheet.
         - onClickRecord: Customized button click event.
      */
-    public func configure(title: String? = nil, subTitle: String? = nil, theme: ResManager.Theme = .dark, audioData: Any, onClickRecord: audioViewFunction? = nil) {
+    public func configure(title: String? = nil, subTitle: String? = nil, theme: CMAResManager.Theme = .dark, audioData: Any, onClickRecord: audioViewFunction? = nil) {
         self.audioData = audioData
         self.labelTitle.text = title
         self.labelSubTitle.text = subTitle
@@ -245,8 +245,8 @@ open class AudioView: UIView {
         - textColor:   The text color of the entire action sheet.
         - topBarColor: The background color of the top bar.
      */
-    public func setTheme(theme: ResManager.Theme, bgColor: UIColor? = nil, textColor: UIColor? = nil, topBarColor: UIColor? = nil) {
-        let themeColors = ResManager.getColorByTheme(theme: theme, bgColor: bgColor, textColor: textColor, topBarColor: topBarColor)
+    public func setTheme(theme: CMAResManager.Theme, bgColor: UIColor? = nil, textColor: UIColor? = nil, topBarColor: UIColor? = nil) {
+        let themeColors = CMAResManager.getColorByTheme(theme: theme, bgColor: bgColor, textColor: textColor, topBarColor: topBarColor)
         
         labelTitle.textColor = themeColors.textColor
         labelSubTitle.textColor = themeColors.textColor
@@ -254,7 +254,7 @@ open class AudioView: UIView {
         self.labelTitle.backgroundColor = themeColors.TopBarColor
         
         for button in buttons {
-            button.setButtonStyle(normal: themeColors.bgColor.color, clicked: themeColors.bgColor.tint, disabled: ResManager.Color.ltGray)
+            button.setButtonStyle(normal: themeColors.bgColor.color, clicked: themeColors.bgColor.tint, disabled: CMAResManager.Color.ltGray)
         }
         
         self.setNeedsDisplay()
@@ -330,7 +330,7 @@ open class InfoView: UIView {
         - theme:       The theme of the action sheet.
         - onClickLike: Customized button click event.
      */
-    public func configure(title: String? = nil, content: String, subTitle: String? = nil, image: UIImage, liked: Bool, theme: ResManager.Theme = .dark, onClickLike: @escaping infoViewFunction) {
+    public func configure(title: String? = nil, content: String, subTitle: String? = nil, image: UIImage, liked: Bool, theme: CMAResManager.Theme = .dark, onClickLike: @escaping infoViewFunction) {
         self.labelTitle.text = title
         self.labelContent.text = content
         self.labelSubTitle.text = subTitle
@@ -344,7 +344,7 @@ open class InfoView: UIView {
      Handle like button click event.
      */
     @objc func onClickBtnLike() {
-        btnLike.setImageForAllState(image: isLiked ? ResManager.getActionSheetImage(.dislike) : ResManager.getActionSheetImage(.like))
+        btnLike.setImageForAllState(image: isLiked ? CMAResManager.getActionSheetImage(.dislike) : CMAResManager.getActionSheetImage(.like))
         isLiked = !isLiked
         
         if let onClickLike = onClickLike {
@@ -361,8 +361,8 @@ open class InfoView: UIView {
          - textColor:   The text color of the entire action sheet.
          - topBarColor: The background color of the top bar.
      */
-    public func setTheme(theme: ResManager.Theme, bgColor: UIColor? = nil, textColor: UIColor? = nil, topBarColor: UIColor? = nil) {
-        let themeColors = ResManager.getColorByTheme(theme: theme, bgColor: bgColor, textColor: textColor, topBarColor: topBarColor)
+    public func setTheme(theme: CMAResManager.Theme, bgColor: UIColor? = nil, textColor: UIColor? = nil, topBarColor: UIColor? = nil) {
+        let themeColors = CMAResManager.getColorByTheme(theme: theme, bgColor: bgColor, textColor: textColor, topBarColor: topBarColor)
         
         labelTitle.textColor = themeColors.textColor
         labelContent.textColor = themeColors.textColor
@@ -370,8 +370,8 @@ open class InfoView: UIView {
         self.backgroundColor = themeColors.bgColor.color
         self.labelTitle.backgroundColor = themeColors.TopBarColor
         btnLike.titleLabel?.textColor = themeColors.textColor
-        btnLike.setButtonStyle(normal: themeColors.bgColor.color, clicked: themeColors.bgColor.tint, disabled: ResManager.Color.ltGray)
-        btnInfo.setButtonStyle(normal: themeColors.bgColor.color, clicked: themeColors.bgColor.tint, disabled: ResManager.Color.ltGray)
+        btnLike.setButtonStyle(normal: themeColors.bgColor.color, clicked: themeColors.bgColor.tint, disabled: CMAResManager.Color.ltGray)
+        btnInfo.setButtonStyle(normal: themeColors.bgColor.color, clicked: themeColors.bgColor.tint, disabled: CMAResManager.Color.ltGray)
         
         self.setNeedsDisplay()
     }

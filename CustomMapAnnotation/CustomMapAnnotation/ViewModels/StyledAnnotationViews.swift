@@ -97,7 +97,7 @@ open class StyledAnnotationViews: UIView {
      - Paramter bgColor:    the color of the background image. Set nil to use default color
      */
     public convenience init(image: AnnotationImage, color: UIColor?, background: BackgroundImage, bgColor: UIColor?) {
-        self.init(image: ResManager.getAnnotImage(image), color: color, background: ResManager.getBgImage(background), bgColor: bgColor)
+        self.init(image: CMAResManager.getAnnotImage(image), color: color, background: CMAResManager.getBgImage(background), bgColor: bgColor)
         customConstraints(bgType: background)
     }
     
@@ -110,7 +110,7 @@ open class StyledAnnotationViews: UIView {
      - Paramter bgColor:    the color of the background image. Set nil to use default color
      */
     public convenience init(image: UIImage, color: UIColor?, background: BackgroundImage, bgColor: UIColor?) {
-        self.init(image: image, color: color, background: ResManager.getBgImage(background), bgColor: bgColor)
+        self.init(image: image, color: color, background: CMAResManager.getBgImage(background), bgColor: bgColor)
         customConstraints(bgType: background)
     }
     
@@ -123,7 +123,7 @@ open class StyledAnnotationViews: UIView {
      - Paramter bgColor:    the color of the background image. Set nil to use default color
      */
     public convenience init(image: AnnotationImage, color: UIColor?, background: UIImage, bgColor: UIColor?) {
-        self.init(image: ResManager.getAnnotImage(image), color: color, background: background, bgColor: bgColor)
+        self.init(image: CMAResManager.getAnnotImage(image), color: color, background: background, bgColor: bgColor)
     }
     
     /**
@@ -133,7 +133,7 @@ open class StyledAnnotationViews: UIView {
      - Paramter background: the BackgroundImage type of the background image
      */
     public convenience init(image: AnnotationImage, background: BackgroundImage) {
-        self.init(image: ResManager.getAnnotImage(image), color: nil, background: ResManager.getBgImage(background), bgColor: nil)
+        self.init(image: CMAResManager.getAnnotImage(image), color: nil, background: CMAResManager.getBgImage(background), bgColor: nil)
         customConstraints(bgType: background)
     }
     
@@ -173,7 +173,7 @@ open class StyledAnnotationViews: UIView {
             return image
         }
         
-        self.annotImage.image = ResManager.getAnnotImage(.error)
+        self.annotImage.image = CMAResManager.getAnnotImage(.error)
         self.backgroundColor = UIColor.red
         return self.toImage()
     }

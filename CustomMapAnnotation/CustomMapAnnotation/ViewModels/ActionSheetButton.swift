@@ -13,7 +13,7 @@ open class ActionSheetButton: LoadingButton {
     /**
      Background color set.
      */
-    open var bgColor = (normal: UIColor.white, clicked: ResManager.Color.ltGray, disabled: ResManager.Color.gray)
+    open var bgColor = (normal: UIColor.white, clicked: CMAResManager.Color.ltGray, disabled: CMAResManager.Color.gray)
     
     required public init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
