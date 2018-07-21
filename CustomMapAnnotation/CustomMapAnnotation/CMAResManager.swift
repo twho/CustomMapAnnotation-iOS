@@ -19,7 +19,7 @@ open class CMAResManager {
      
      Returns a UIImage from built-in resource
      */
-    static func getAnnotImage(_ annotImage: StyledAnnotationViews.AnnotationImage) -> UIImage {
+    static func getAnnotImage(_ annotImage: StyledAnnotationView.AnnotationImage) -> UIImage {
         switch annotImage {
         case .error: return UIImage(named: "ic_error")!
         case .police: return UIImage(named: "ic_police")!
@@ -40,7 +40,7 @@ open class CMAResManager {
      
      Returns a UIImage from built-in resource
      */
-    static func getBgImage(_ annotImage: StyledAnnotationViews.BackgroundImage) -> UIImage {
+    static func getBgImage(_ annotImage: StyledAnnotationView.BackgroundImage) -> UIImage {
         switch annotImage {
         case .bubble: return UIImage(named: "ic_annot1")!
         case .square: return UIImage(named: "ic_annot2")!

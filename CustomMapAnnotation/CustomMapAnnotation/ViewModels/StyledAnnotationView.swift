@@ -8,7 +8,7 @@
 
 import UIKit
 
-open class StyledAnnotationViews: UIView {
+open class StyledAnnotationView: UIView {
     /**
      The entire annotation view.
      */
@@ -180,7 +180,7 @@ open class StyledAnnotationViews: UIView {
 }
 
 // MARK: Built-in image resources
-extension StyledAnnotationViews {
+extension StyledAnnotationView {
 
     /**
      Built-in annotation images.

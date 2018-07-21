@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3034262121025B9400AC062F /* StyledAnnotationViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3034261921025B9400AC062F /* StyledAnnotationViews.swift */; };
+		3034262121025B9400AC062F /* StyledAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3034261921025B9400AC062F /* StyledAnnotationView.swift */; };
 		3034262221025B9400AC062F /* CustomActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3034261A21025B9400AC062F /* CustomActionSheet.swift */; };
 		3034262421025B9400AC062F /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3034261C21025B9400AC062F /* InfoView.xib */; };
 		3034262521025B9400AC062F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3034261D21025B9400AC062F /* Extensions.swift */; };
@@ -53,7 +53,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3034261921025B9400AC062F /* StyledAnnotationViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledAnnotationViews.swift; sourceTree = "<group>"; };
+		3034261921025B9400AC062F /* StyledAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledAnnotationView.swift; sourceTree = "<group>"; };
 		3034261A21025B9400AC062F /* CustomActionSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActionSheet.swift; sourceTree = "<group>"; };
 		3034261C21025B9400AC062F /* InfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
 		3034261D21025B9400AC062F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -113,7 +113,7 @@
 		3034261821025B9400AC062F /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
-				3034261921025B9400AC062F /* StyledAnnotationViews.swift */,
+				3034261921025B9400AC062F /* StyledAnnotationView.swift */,
 				3034261F21025B9400AC062F /* StyledAnnotationView.xib */,
 				3034261E21025B9400AC062F /* ActionSheetViews.swift */,
 				3034262021025B9400AC062F /* AudioView.xib */,
@@ -329,7 +329,7 @@
 				3034262621025B9400AC062F /* ActionSheetViews.swift in Sources */,
 				3034262521025B9400AC062F /* Extensions.swift in Sources */,
 				3034262221025B9400AC062F /* CustomActionSheet.swift in Sources */,
-				3034262121025B9400AC062F /* StyledAnnotationViews.swift in Sources */,
+				3034262121025B9400AC062F /* StyledAnnotationView.swift in Sources */,
 				304EE4B2210288C600439745 /* ActionSheetButton.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
