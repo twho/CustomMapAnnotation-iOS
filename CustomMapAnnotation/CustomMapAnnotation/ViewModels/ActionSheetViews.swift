@@ -167,7 +167,7 @@ open class AudioView: UIView {
      
      - Parameter resource: The audio data resource either in URL or Data form.
      */
-    func playAudio(resource: Any) {
+    public func playAudio(resource: Any) {
         // Setup GUIs before playing audio
         btnRecord.isEnabled = false
         btnPlay.setImage(UIImage(named: "ic_pause"), for: UIControlState())
