@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CustomMapAnnotation"
-  s.version      = "0.0.1"
+  s.version      = "0.0.2"
   s.summary      = "Easily creates customized annotation views and callout views."
 
   # This description is used to generate tags and improve search results.
@@ -24,8 +24,7 @@ Pod::Spec.new do |s|
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  s.description  = <<-DESC
-                   DESC
+  s.description  = "A tool that helps create customized map annotations, annotation animation, and actionsheet-styled callout views."
 
   s.homepage     = "https://github.com/twho/CustomMapAnnotation-iOS"
   # s.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
@@ -78,7 +77,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/twho/CustomMapAnnotation-iOS.git", :tag => "0.0.1" }
+  s.source       = { :git => "https://github.com/twho/CustomMapAnnotation-iOS.git", :tag => "0.0.2" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -133,6 +132,7 @@ Pod::Spec.new do |s|
 
   # s.requires_arc = true
 
+  s.swift_version = "4.1"
   # s.xcconfig = { "HEADER_SEARCH_PATHS" => "$(SDKROOT)/usr/include/libxml2" }
   # s.dependency "JSONKit", "~> 1.4"
 

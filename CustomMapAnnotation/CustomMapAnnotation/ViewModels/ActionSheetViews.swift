@@ -10,13 +10,14 @@ import UIKit
 import AVFoundation
 
 /**
- Built-in background images.
+ Built-in action sheet button images.
  
- - bubble: bubble background
- - square: square-shaped background
- - circle: circular background
- - heart:  heart-shaped background
- - flag:   flag background
+ - like:    like image
+ - dislike: dislike image
+ - play:    audio play button image
+ - stop:    audio stop button image
+ - pause:   audio pause button image
+ - record:  audio record button image
  */
 public enum ActionSheetButtonImg {
     case like
@@ -27,27 +28,66 @@ public enum ActionSheetButtonImg {
     case record
 }
 
+// MARK: - AudioView
 open class AudioView: UIView {
     
-    let LOG_TAG = "[AudioView] "
+    let LOG_TAG = "[CustomMapAnnotation AudioView] "
     
+    /**
+     The subtitle of the callout audio view.
+     */
     @IBOutlet weak var labelSubTitle: UILabel!
+    
+    /**
+     The title of the callout audio action sheet.
+     */
     @IBOutlet weak var labelTitle: UILabel!
+    
+    /**
+     The play button of the audio action sheet.
+     */
     @IBOutlet weak var btnPlay: ActionSheetButton!
+    
+    /**
+     The stop button of the audio action sheet.
+     */
     @IBOutlet weak var btnStop: ActionSheetButton!
+    
+    /**
+     The record button of the audio action sheet.
+     */
     @IBOutlet weak var btnRecord: ActionSheetButton!
+    
+    /**
+     The set of the buttons in audio action sheet.
+     */
     private var buttons: [ActionSheetButton]!
     
-    // Audio Utils
+    // MARK: - Audio Utils
+    /**
+     The audio player used in audio action sheet view.
+     */
     var audioPlayer: AVAudioPlayer?
-    var audioRecorder: AVAudioRecorder?
     
+    /**
+     Type alias of input external function or logic
+     */
     public typealias audioViewFunction = ((AudioView) -> ())
     
+    /**
+     Used to stored function for record button click event.
+     */
     private var onClickRecord: ((AudioView) -> Void)? = nil
+    
+    /**
+     Used to stored function for fetching audio data.
+     */
     private var fetchAudio: audioViewFunction? = nil
     private var audioData: Any? = nil
     
+    /**
+     Set true to hide top bar.
+     */
     public var isTopBarHidden: Bool = false {
         didSet {
             labelTitle.isHidden = isTopBarHidden
@@ -57,6 +97,7 @@ open class AudioView: UIView {
     override open func awakeFromNib() {
         super.awakeFromNib()
         
+        // Add button click event
         btnPlay.addTarget(self, action: #selector(onClickBtnPlay), for: .touchUpInside)
         btnStop.addTarget(self, action: #selector(onClickBtnStop), for: .touchUpInside)
         btnRecord.addTarget(self, action: #selector(onClickBtnRecord), for: .touchUpInside)
@@ -64,11 +105,31 @@ open class AudioView: UIView {
         buttons = [btnPlay, btnStop, btnRecord]
     }
     
+    /**
+     Configure audio action sheet with input paramters.
+     
+     - Parameters:
+        - title:         The title of the audio action sheet.
+        - subTitle:      The subtitle of the audio action sheet.
+        - theme:         The theme of the action sheet.
+        - fetchAudio:    Customized method for fetching audio data.
+        - onClickRecord: Customized button click event.
+     */
     public func configure(title: String? = nil, subTitle: String? = nil, theme: ResManager.Theme = .dark, fetchAudio: @escaping audioViewFunction, onClickRecord: audioViewFunction? = nil) {
         self.fetchAudio = fetchAudio
         configure(title: title, subTitle: subTitle, theme: theme, audioData: fetchAudio, onClickRecord: onClickRecord)
     }
     
+    /**
+     Configure audio action sheet with input paramters.
+     
+     - Parameters:
+        - title:         The title of the audio action sheet.
+        - subTitle:      The subtitle of the audio action sheet.
+        - theme:         The theme of the action sheet.
+        - audioData:     The audio data to be used in audio action sheet.
+        - onClickRecord: Customized button click event.
+     */
     public func configure(title: String? = nil, subTitle: String? = nil, theme: ResManager.Theme = .dark, audioData: Any, onClickRecord: audioViewFunction? = nil) {
         self.audioData = audioData
         self.labelTitle.text = title
@@ -83,6 +144,9 @@ open class AudioView: UIView {
         setTheme(theme: theme)
     }
     
+    /**
+     Handle play button click event.
+     */
     @objc func onClickBtnPlay() {
         if nil != audioPlayer && (audioPlayer?.isPlaying)! {
             btnPlay.setImage(UIImage(named: "ic_play"), for: UIControlState())
@@ -98,6 +162,11 @@ open class AudioView: UIView {
         }
     }
     
+    /**
+     Play audio with specified resource.
+     
+     - Parameter resource: The audio data resource either in URL or Data form.
+     */
     func playAudio(resource: Any) {
         // Setup GUIs before playing audio
         btnRecord.isEnabled = false
@@ -121,6 +190,9 @@ open class AudioView: UIView {
         }
     }
     
+    /**
+     Handle stop button click event.
+     */
     @objc func onClickBtnStop() {
         if nil != audioPlayer && (audioPlayer?.isPlaying)! {
             audioPlayer?.stop()
@@ -130,6 +202,9 @@ open class AudioView: UIView {
         btnPlay.setImage(UIImage(named: "ic_play"), for: UIControlState())
     }
     
+    /**
+     Handle record button click event.
+     */
     @objc func onClickBtnRecord() {
         if let onClickRecord = onClickRecord {
             onClickRecord(self)
@@ -186,6 +261,7 @@ open class AudioView: UIView {
     }
 }
 
+// MARK: - AVAudioPlayerDelegate
 extension AudioView: AVAudioPlayerDelegate {
     public func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         audioPlayer = nil // Clean up
@@ -193,17 +269,48 @@ extension AudioView: AVAudioPlayerDelegate {
     }
 }
 
+// MARK: - InfoView
 open class InfoView: UIView {
     
+    /**
+     Used to diaply information content image.
+     */
     @IBOutlet weak var btnInfo: ActionSheetButton!
+    
+    /**
+     Like button to let user rate the information.
+     */
     @IBOutlet weak var btnLike: ActionSheetButton!
+    
+    /**
+     The title of the callout audio action sheet.
+     */
     @IBOutlet weak var labelTitle: UILabel!
+    
+    /**
+     The subtitle of the callout audio action sheet.
+     */
     @IBOutlet weak var labelSubTitle: UILabel!
+    
+    /**
+     The content of the callout audio action sheet.
+     */
     @IBOutlet weak var labelContent: UILabel!
     
+    /**
+     Type alias of input external function or logic
+     */
     public typealias infoViewFunction = ((InfoView) -> ())
     
+    /**
+     Used to stored function for like button click event.
+     */
     private var onClickLike: ((InfoView) -> Void)? = nil
+    
+    /**
+     Flag indicated if the like button is clicked.
+     */
+    private var isLiked = false
     
     override open func awakeFromNib() {
         super.awakeFromNib()
@@ -211,16 +318,35 @@ open class InfoView: UIView {
         btnLike.addTarget(self, action: #selector(onClickBtnLike), for: .touchUpInside)
     }
     
-    public func configure(title: String? = nil, content: String, subTitle: String? = nil, image: UIImage, theme: ResManager.Theme = .dark, onClickLike: @escaping infoViewFunction) {
+    /**
+     Configure audio action sheet with input paramters.
+     
+     - Parameters:
+        - title:       The title of the info action sheet.
+        - content:     The content of the info action sheet.
+        - subTitle:    The subtitle of the info action sheet.
+        - image:       The image of the info action sheet.
+        - liked:       Indicatd if the information is liked.
+        - theme:       The theme of the action sheet.
+        - onClickLike: Customized button click event.
+     */
+    public func configure(title: String? = nil, content: String, subTitle: String? = nil, image: UIImage, liked: Bool, theme: ResManager.Theme = .dark, onClickLike: @escaping infoViewFunction) {
         self.labelTitle.text = title
         self.labelContent.text = content
         self.labelSubTitle.text = subTitle
         self.onClickLike = onClickLike
         self.btnInfo.setImageForAllState(image: image)
+        self.isLiked = liked
         setTheme(theme: theme)
     }
     
+    /**
+     Handle like button click event.
+     */
     @objc func onClickBtnLike() {
+        btnLike.setImageForAllState(image: isLiked ? ResManager.getActionSheetImage(.dislike) : ResManager.getActionSheetImage(.like))
+        isLiked = !isLiked
+        
         if let onClickLike = onClickLike {
             onClickLike(self)
         }
@@ -230,10 +356,10 @@ open class InfoView: UIView {
      Setup different theme view colors.
      
      - Parameters:
-     - theme:       The Theme of the action sheet.
-     - bgColor:     The background color of the action sheet.
-     - textColor:   The text color of the entire action sheet.
-     - topBarColor: The background color of the top bar.
+         - theme:       The Theme of the action sheet.
+         - bgColor:     The background color of the action sheet.
+         - textColor:   The text color of the entire action sheet.
+         - topBarColor: The background color of the top bar.
      */
     public func setTheme(theme: ResManager.Theme, bgColor: UIColor? = nil, textColor: UIColor? = nil, topBarColor: UIColor? = nil) {
         let themeColors = ResManager.getColorByTheme(theme: theme, bgColor: bgColor, textColor: textColor, topBarColor: topBarColor)

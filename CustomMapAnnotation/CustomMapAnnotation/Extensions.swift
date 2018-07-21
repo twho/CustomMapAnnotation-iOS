@@ -58,7 +58,7 @@ extension UIImageView {
     /**
      Change the color of the image.
      
-     - Parameter color: The color to be set to the image.
+     - Parameter color: The color to be set to the UIImageView.
      */
     func colored(color: UIColor?) {
         guard let color = color else { return }
@@ -72,7 +72,7 @@ extension UIImage {
     /**
      Change the color of the image.
      
-     - Parameter color: The color to be set to the image.
+     - Parameter color: The color to be set to the UIImage.
      */
     public func colored(color: UIColor?) -> UIImage? {
         if let newColor = color {
@@ -132,7 +132,14 @@ extension UIButton {
 extension UIColor {
     
     /**
+     Convert RGB value to CMYK value.
      
+     - Parameters:
+        - r: The red value of RGB.
+        - g: The green value of RGB.
+        - b: The blue value of RGB.
+     
+     Returns a 4-tuple that represents the CMYK value converted from input RGB.
      */
     private func RGBtoCMYK(r: CGFloat, g: CGFloat, b: CGFloat) -> (c: CGFloat, m: CGFloat, y: CGFloat, k: CGFloat) {
         
@@ -149,6 +156,17 @@ extension UIColor {
         return (c, m, y, minCMY)
     }
     
+    /**
+     Convert CMYK value to RGB value.
+     
+     - Parameters:
+         - c: The cyan value of CMYK.
+         - m: The magenta value of CMYK.
+         - y: The yellow value of CMYK.
+         - k: The key/black value of CMYK.
+     
+     Returns a 3-tuple that represents the RGB value converted from input CMYK.
+     */
     private func CMYKtoRGB(c: CGFloat, m: CGFloat, y: CGFloat, k: CGFloat) -> (r: CGFloat, g: CGFloat, b: CGFloat) {
         let r = (1 - c) * (1 - k)
         let g = (1 - m) * (1 - k)
@@ -156,6 +174,11 @@ extension UIColor {
         return (r, g, b)
     }
     
+    /**
+     Get dark color tint of the specified color.
+     
+     Returns a darker color converted from specified color.
+     */
     public func getDarkColorTint() -> UIColor {
         let ciColor = CIColor(color: self)
         let originCMYK = RGBtoCMYK(r: ciColor.red, g: ciColor.green, b: ciColor.blue)
@@ -164,6 +187,11 @@ extension UIColor {
         return UIColor(red: tintRGB.r, green: tintRGB.g, blue: tintRGB.b, alpha: 1.0)
     }
     
+    /**
+     Get lighter color tint of the specified color.
+     
+     Returns a lighter color converted from specified color.
+     */
     public func getLtColorTint() -> UIColor {
         let ciColor = CIColor(color: self)
         let originCMYK = RGBtoCMYK(r: ciColor.red, g: ciColor.green, b: ciColor.blue)
@@ -172,6 +200,11 @@ extension UIColor {
         return UIColor(red: tintRGB.r, green: tintRGB.g, blue: tintRGB.b, alpha: 1.0)
     }
     
+    /**
+     Get inferred text color based on specified color.
+     
+     Returns the inferred color.
+     */
     public func getAppropriateTextColor() -> UIColor {
         let ciColor = CIColor(color: self)
         let originCMYK = RGBtoCMYK(r: ciColor.red, g: ciColor.green, b: ciColor.blue)
@@ -183,8 +216,14 @@ extension UIColor {
     }
 }
 
+// MARK: - UIButton
 extension UIButton {
     
+    /**
+     Set button image for all button states
+     
+     - Parameter image: the image to be set to the button.
+     */
     public func setImageForAllState(image: UIImage){
         self.setImage(image, for: .normal)
         self.setImage(image, for: .highlighted)
