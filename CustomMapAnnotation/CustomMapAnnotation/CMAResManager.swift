@@ -19,7 +19,7 @@ open class CMAResManager {
      
      Returns a UIImage from built-in resource
      */
-    static func getAnnotImage(_ annotImage: StyledAnnotationView.AnnotationImage) -> UIImage {
+    public static func getAnnotImage(_ annotImage: StyledAnnotationView.AnnotationImage) -> UIImage {
         switch annotImage {
         case .error: return UIImage(named: "ic_error")!
         case .police: return UIImage(named: "ic_police")!
@@ -40,7 +40,7 @@ open class CMAResManager {
      
      Returns a UIImage from built-in resource
      */
-    static func getBgImage(_ annotImage: StyledAnnotationView.BackgroundImage) -> UIImage {
+    public static func getBgImage(_ annotImage: StyledAnnotationView.BackgroundImage) -> UIImage {
         switch annotImage {
         case .bubble: return UIImage(named: "ic_annot1")!
         case .square: return UIImage(named: "ic_annot2")!
@@ -57,7 +57,7 @@ open class CMAResManager {
      
      Returns a UIImage from built-in resource
      */
-    static func getActionSheetImage(_ actionSheetImg: ActionSheetButtonImg) -> UIImage {
+    public static func getActionSheetImage(_ actionSheetImg: ActionSheetButtonImg) -> UIImage {
         switch actionSheetImg {
         case .like: return UIImage(named: "ic_like")!
         case .dislike: return UIImage(named: "ic_dislike")!
@@ -71,7 +71,7 @@ open class CMAResManager {
     /**
      Color palette contains color used in the module.
      */
-    struct Color {
+    public struct Color {
         static let gray = UIColor(red: 0.4, green: 0.4, blue: 0.4, alpha: 1)
         static let ltGray = UIColor(red:0.57, green:0.57, blue:0.57, alpha:1.0)
         static let gray50 = UIColor(red:0.50, green:0.50, blue:0.50, alpha:1.0)
@@ -102,7 +102,7 @@ open class CMAResManager {
     /**
      Color set used for entire theme.
      */
-    struct ThemeColor {
+    public struct ThemeColor {
         static let light = (textColor: Color.darkGray, TopBarColor: Color.ltBlue, bgColor: (color: UIColor.white, tint: Color.ltGray))
         static let dark = (textColor: UIColor.white, TopBarColor: Color.ltGray, bgColor: (color: Color.darkGray, tint: Color.ltGray))
     }
@@ -116,7 +116,7 @@ open class CMAResManager {
         - textColor:   The text color of the entire action sheet.
         - topBarColor: The background color of the top bar.
      */
-    static func getColorByTheme(theme: Theme, bgColor: UIColor? = nil, textColor: UIColor? = nil, topBarColor: UIColor? = nil) -> (textColor: UIColor, TopBarColor: UIColor, bgColor: (color: UIColor, tint: UIColor)) {
+    public static func getColorByTheme(theme: Theme, bgColor: UIColor? = nil, textColor: UIColor? = nil, topBarColor: UIColor? = nil) -> (textColor: UIColor, TopBarColor: UIColor, bgColor: (color: UIColor, tint: UIColor)) {
         var themeColors = ThemeColor.light
         switch theme {
         case .light:

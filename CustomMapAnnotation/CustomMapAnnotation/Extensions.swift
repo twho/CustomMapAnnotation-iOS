@@ -16,7 +16,7 @@ extension UIImage {
         - color: the color to be created as an UIImage
         - size:  the size of the UIImage, no need to be set when creating
      */
-    convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
+    public convenience init?(color: UIColor, size: CGSize = CGSize(width: 1, height: 1)) {
         let rect = CGRect(origin: .zero, size: size)
         UIGraphicsBeginImageContextWithOptions(rect.size, true, 0.0)
         color.setFill()
@@ -36,7 +36,7 @@ extension UIImage {
         - size:  The size of the UIImage
         - scale: The scale of the output UIImage
      */
-    func getClearImage() -> UIImage {
+    public func getClearImage() -> UIImage {
         UIGraphicsBeginImageContext(self.size)
         let context:CGContext = UIGraphicsGetCurrentContext()!
         UIGraphicsPushContext(context)
@@ -60,7 +60,7 @@ extension UIImageView {
      
      - Parameter color: The color to be set to the UIImageView.
      */
-    func colored(color: UIColor?) {
+    public func colored(color: UIColor?) {
         guard let color = color else { return }
         self.image = self.image!.withRenderingMode(.alwaysTemplate)
         self.tintColor = color
@@ -225,10 +225,8 @@ extension UIButton {
      - Parameter image: the image to be set to the button.
      */
     public func setImageForAllState(image: UIImage){
-        self.setImage(image, for: .normal)
-        self.setImage(image, for: .highlighted)
-        self.setImage(image, for: .selected)
-        self.setImage(image, for: .disabled)
-        self.setImage(image, for: .focused)
+        for state: UIControlState in [.normal, .highlighted, .disabled, .selected, .focused, .application, .reserved] {
+            self.setImage(image, for: state)
+        }
     }
 }
