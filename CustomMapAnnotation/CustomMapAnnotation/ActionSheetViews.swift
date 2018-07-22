@@ -106,6 +106,17 @@ open class AudioView: UIView {
     }
     
     /**
+     Instantiate audio view
+     
+     - Parameter vcOwner: The owner of the audio view.
+     */
+    public static func instantiate(_ vcOwner: UIViewController) -> AudioView? {
+        let audioView = UINib(nibName: "CMAAudioView", bundle: CMAResManager.getBundle(bundleType: .viewNibs)).instantiate(withOwner: vcOwner, options: nil)[0] as? AudioView
+        
+        return audioView
+    }
+    
+    /**
      Configure audio action sheet with input paramters.
      
      - Parameters:
@@ -149,7 +160,7 @@ open class AudioView: UIView {
      */
     @objc func onClickBtnPlay() {
         if nil != audioPlayer && (audioPlayer?.isPlaying)! {
-            btnPlay.setImage(UIImage(named: "ic_play"), for: UIControlState())
+            btnPlay.setImage(CMAResManager.getActionSheetImage(.play), for: UIControlState())
             audioPlayer?.pause()
         } else {
             btnPlay.isLoading = true
@@ -170,7 +181,7 @@ open class AudioView: UIView {
     public func playAudio(resource: Any) {
         // Setup GUIs before playing audio
         btnRecord.isEnabled = false
-        btnPlay.setImage(UIImage(named: "ic_pause"), for: UIControlState())
+        btnPlay.setImage(CMAResManager.getActionSheetImage(.pause), for: UIControlState())
         btnPlay.isLoading = false
         
         do {
@@ -199,7 +210,7 @@ open class AudioView: UIView {
             audioPlayer = nil
         }
         
-        btnPlay.setImage(UIImage(named: "ic_play"), for: UIControlState())
+        btnPlay.setImage(CMAResManager.getActionSheetImage(.play), for: UIControlState())
     }
     
     /**
@@ -265,7 +276,7 @@ open class AudioView: UIView {
 extension AudioView: AVAudioPlayerDelegate {
     public func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         audioPlayer = nil // Clean up
-        btnPlay.setImage(UIImage(named: "ic_play"), for: UIControlState())
+        btnPlay.setImage(CMAResManager.getActionSheetImage(.play), for: UIControlState())
     }
 }
 
@@ -316,6 +327,17 @@ open class InfoView: UIView {
         super.awakeFromNib()
         
         btnLike.addTarget(self, action: #selector(onClickBtnLike), for: .touchUpInside)
+    }
+    
+    /**
+     Instantiate audio view
+     
+     - Parameter vcOwner: The owner of the audio view.
+     */
+    public static func instantiate(_ vcOwner: UIViewController) -> InfoView? {
+        let infoView = UINib(nibName: "CMAInfoView", bundle: CMAResManager.getBundle(bundleType: .viewNibs)).instantiate(withOwner: vcOwner, options: nil)[0] as? InfoView
+        
+        return infoView
     }
     
     /**

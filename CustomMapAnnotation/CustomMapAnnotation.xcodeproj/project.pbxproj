@@ -9,11 +9,11 @@
 /* Begin PBXBuildFile section */
 		3034262121025B9400AC062F /* StyledAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3034261921025B9400AC062F /* StyledAnnotationView.swift */; };
 		3034262221025B9400AC062F /* CustomActionSheet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3034261A21025B9400AC062F /* CustomActionSheet.swift */; };
-		3034262421025B9400AC062F /* InfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3034261C21025B9400AC062F /* InfoView.xib */; };
+		3034262421025B9400AC062F /* CMAInfoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3034261C21025B9400AC062F /* CMAInfoView.xib */; };
 		3034262521025B9400AC062F /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3034261D21025B9400AC062F /* Extensions.swift */; };
 		3034262621025B9400AC062F /* ActionSheetViews.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3034261E21025B9400AC062F /* ActionSheetViews.swift */; };
 		3034262721025B9400AC062F /* StyledAnnotationView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3034261F21025B9400AC062F /* StyledAnnotationView.xib */; };
-		3034262821025B9400AC062F /* AudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3034262021025B9400AC062F /* AudioView.xib */; };
+		3034262821025B9400AC062F /* CMAAudioView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3034262021025B9400AC062F /* CMAAudioView.xib */; };
 		3034267021025BD500AC062F /* CMAResManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3034266E21025BD500AC062F /* CMAResManager.swift */; };
 		304EE49C2102889200439745 /* img_triangle.png in Resources */ = {isa = PBXBuildFile; fileRef = 304EE4872102889100439745 /* img_triangle.png */; };
 		304EE49D2102889200439745 /* ic_play.png in Resources */ = {isa = PBXBuildFile; fileRef = 304EE4882102889100439745 /* ic_play.png */; };
@@ -55,11 +55,11 @@
 /* Begin PBXFileReference section */
 		3034261921025B9400AC062F /* StyledAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyledAnnotationView.swift; sourceTree = "<group>"; };
 		3034261A21025B9400AC062F /* CustomActionSheet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomActionSheet.swift; sourceTree = "<group>"; };
-		3034261C21025B9400AC062F /* InfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = InfoView.xib; sourceTree = "<group>"; };
+		3034261C21025B9400AC062F /* CMAInfoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMAInfoView.xib; sourceTree = "<group>"; };
 		3034261D21025B9400AC062F /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		3034261E21025B9400AC062F /* ActionSheetViews.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActionSheetViews.swift; sourceTree = "<group>"; };
 		3034261F21025B9400AC062F /* StyledAnnotationView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = StyledAnnotationView.xib; sourceTree = "<group>"; };
-		3034262021025B9400AC062F /* AudioView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AudioView.xib; sourceTree = "<group>"; };
+		3034262021025B9400AC062F /* CMAAudioView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CMAAudioView.xib; sourceTree = "<group>"; };
 		3034266E21025BD500AC062F /* CMAResManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CMAResManager.swift; sourceTree = "<group>"; };
 		304EE4872102889100439745 /* img_triangle.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img_triangle.png; sourceTree = "<group>"; };
 		304EE4882102889100439745 /* ic_play.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = ic_play.png; sourceTree = "<group>"; };
@@ -110,18 +110,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		3034261821025B9400AC062F /* ViewModels */ = {
+		303F96D22103F38300D6CA85 /* ViewNibs */ = {
 			isa = PBXGroup;
 			children = (
-				3034261921025B9400AC062F /* StyledAnnotationView.swift */,
 				3034261F21025B9400AC062F /* StyledAnnotationView.xib */,
-				3034261E21025B9400AC062F /* ActionSheetViews.swift */,
-				3034262021025B9400AC062F /* AudioView.xib */,
-				3034261C21025B9400AC062F /* InfoView.xib */,
-				3034261A21025B9400AC062F /* CustomActionSheet.swift */,
-				304EE4B1210288C600439745 /* ActionSheetButton.swift */,
+				3034262021025B9400AC062F /* CMAAudioView.xib */,
+				3034261C21025B9400AC062F /* CMAInfoView.xib */,
 			);
-			path = ViewModels;
+			path = ViewNibs;
 			sourceTree = "<group>";
 		};
 		308A4AD220FD8798004E23C9 = {
@@ -145,10 +141,14 @@
 		308A4ADE20FD8798004E23C9 /* CustomMapAnnotation */ = {
 			isa = PBXGroup;
 			children = (
-				3034261821025B9400AC062F /* ViewModels */,
-				308A4AFA20FD87DB004E23C9 /* Resources */,
+				3034261921025B9400AC062F /* StyledAnnotationView.swift */,
+				3034261E21025B9400AC062F /* ActionSheetViews.swift */,
+				3034261A21025B9400AC062F /* CustomActionSheet.swift */,
+				304EE4B1210288C600439745 /* ActionSheetButton.swift */,
 				3034261D21025B9400AC062F /* Extensions.swift */,
 				3034266E21025BD500AC062F /* CMAResManager.swift */,
+				303F96D22103F38300D6CA85 /* ViewNibs */,
+				308A4AFA20FD87DB004E23C9 /* Resources */,
 				308A4ADF20FD8798004E23C9 /* CustomMapAnnotation.h */,
 				308A4AE020FD8798004E23C9 /* Info.plist */,
 			);
@@ -284,7 +284,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3034262821025B9400AC062F /* AudioView.xib in Resources */,
+				3034262821025B9400AC062F /* CMAAudioView.xib in Resources */,
 				304EE4A92102889200439745 /* ic_stop.png in Resources */,
 				304EE4A02102889200439745 /* ic_dislike.png in Resources */,
 				304EE4A72102889200439745 /* ic_like.png in Resources */,
@@ -294,7 +294,7 @@
 				304EE4AB2102889200439745 /* ic_personal.png in Resources */,
 				3034262721025B9400AC062F /* StyledAnnotationView.xib in Resources */,
 				304EE4A22102889200439745 /* ic_gas.png in Resources */,
-				3034262421025B9400AC062F /* InfoView.xib in Resources */,
+				3034262421025B9400AC062F /* CMAInfoView.xib in Resources */,
 				304EE4A12102889200439745 /* img_expandview.png in Resources */,
 				304EE4AD2102889200439745 /* ic_charging.png in Resources */,
 				304EE4B02102889200439745 /* ic_annot2.png in Resources */,
