@@ -103,6 +103,11 @@ open class AudioView: UIView {
         btnRecord.addTarget(self, action: #selector(onClickBtnRecord), for: .touchUpInside)
         
         buttons = [btnPlay, btnStop, btnRecord]
+        
+        // Set image resource
+        btnPlay.setImageForAllState(image: CMAResManager.getActionSheetImage(.play))
+        btnStop.setImageForAllState(image: CMAResManager.getActionSheetImage(.stop))
+        btnRecord.setImageForAllState(image: CMAResManager.getActionSheetImage(.record))
     }
     
     /**
@@ -148,9 +153,9 @@ open class AudioView: UIView {
         
         if let onClickRecord = onClickRecord {
             self.onClickRecord = onClickRecord
-        } else {
-            btnRecord.isEnabled = false
         }
+        
+        btnRecord.isEnabled = onClickRecord != nil
         
         setTheme(theme: theme)
     }
@@ -160,7 +165,7 @@ open class AudioView: UIView {
      */
     @objc func onClickBtnPlay() {
         if nil != audioPlayer && (audioPlayer?.isPlaying)! {
-            btnPlay.setImage(CMAResManager.getActionSheetImage(.play), for: UIControlState())
+            btnPlay.setImageForAllState(image: CMAResManager.getActionSheetImage(.play))
             audioPlayer?.pause()
         } else {
             btnPlay.isLoading = true
@@ -276,7 +281,8 @@ open class AudioView: UIView {
 extension AudioView: AVAudioPlayerDelegate {
     public func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         audioPlayer = nil // Clean up
-        btnPlay.setImage(CMAResManager.getActionSheetImage(.play), for: UIControlState())
+        btnPlay.setImageForAllState(image: CMAResManager.getActionSheetImage(.play))
+        btnRecord.isEnabled = onClickRecord != nil
     }
 }
 
@@ -284,14 +290,14 @@ extension AudioView: AVAudioPlayerDelegate {
 open class InfoView: UIView {
     
     /**
-     Used to diaply information content image.
-     */
-    @IBOutlet weak var btnInfo: ActionSheetButton!
-    
-    /**
      Like button to let user rate the information.
      */
     @IBOutlet weak var btnLike: ActionSheetButton!
+    
+    /**
+     Used to diaply information content image.
+     */
+    @IBOutlet weak var btnInfo: ActionSheetButton!
     
     /**
      The title of the callout audio action sheet.
@@ -307,6 +313,11 @@ open class InfoView: UIView {
      The content of the callout audio action sheet.
      */
     @IBOutlet weak var labelContent: UILabel!
+    
+    /**
+     A tuple of like button image. Configurable from external.
+     */
+    public var btnLikeImage = (isLiked: CMAResManager.getActionSheetImage(.like), notLiked: CMAResManager.getActionSheetImage(.dislike))
     
     /**
      Type alias of input external function or logic
@@ -359,6 +370,8 @@ open class InfoView: UIView {
         self.onClickLike = onClickLike
         self.btnInfo.setImageForAllState(image: image)
         self.isLiked = liked
+        alternateBtnLikeState()
+        
         setTheme(theme: theme)
     }
     
@@ -366,12 +379,30 @@ open class InfoView: UIView {
      Handle like button click event.
      */
     @objc func onClickBtnLike() {
-        btnLike.setImageForAllState(image: isLiked ? CMAResManager.getActionSheetImage(.dislike) : CMAResManager.getActionSheetImage(.like))
         isLiked = !isLiked
+        alternateBtnLikeState()
         
         if let onClickLike = onClickLike {
             onClickLike(self)
         }
+    }
+    
+    /**
+     Alternate like button state
+     */
+    public func alternateBtnLikeState() {
+        btnLike.setImageForAllState(image: isLiked ? btnLikeImage.isLiked : btnLikeImage.notLiked)
+    }
+    
+    /**
+     Set like button image for two different states
+     
+     - Parameters:
+        - isLikedImg: The image for like state.
+        - isLikedImg: The image for dislike state.
+     */
+    public func setBtnLikeImage(isLikedImg: UIImage, notLikedImg: UIImage) {
+        btnLikeImage = (isLiked: isLikedImg, notLiked: notLikedImg)
     }
     
     /**

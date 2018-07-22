@@ -14,8 +14,8 @@ open class CMAResManager {
     private static let LOG_TAG = "[CustomMapAnnotation ResManager] "
     
     public enum CMABundle: String {
-        case viewNibs = "CustomMapAnnotation-ViewNibs"
-        case resources = "CustomMapAnnotation-Resources"
+        case viewNibs = "CustomMapAnnotation-ViewNibs.bundle"
+        case resources = "CustomMapAnnotation-Resources.bundle"
     }
     
     /**
@@ -23,7 +23,8 @@ open class CMAResManager {
      */
     public static func getBundle(bundleType: CMABundle) -> Bundle {
         let podBundle = Bundle(for: CMAResManager.self)
-        let bundleURL = podBundle.url(forResource: bundleType.rawValue, withExtension: "bundle")
+//        let bundleURL = podBundle.url(forResource: bundleType.rawValue, withExtension: "bundle")
+        let bundleURL = podBundle.resourceURL?.appendingPathComponent(bundleType.rawValue)
         
         return Bundle(url: bundleURL!)!
     }

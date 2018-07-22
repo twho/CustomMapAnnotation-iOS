@@ -107,7 +107,8 @@ extension UIImage {
      */
     public static func make(named: String) -> UIImage? {
         let bundle = CMAResManager.getBundle(bundleType: .resources)
-        return UIImage(named: CMAResManager.CMABundle.resources.rawValue + "/\(named)", in: bundle, compatibleWith: nil)
+//        return UIImage(named: CMAResManager.CMABundle.resources.rawValue + "/\(named)", in: bundle, compatibleWith: nil)
+        return UIImage(named: "\(named)", in: bundle, compatibleWith: nil)
     }
 }
 

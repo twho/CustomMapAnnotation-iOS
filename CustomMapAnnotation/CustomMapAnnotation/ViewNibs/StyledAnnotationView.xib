@@ -1,13 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StyledAnnotationView" customModule="LocationAudioMessage" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="StyledAnnotationView" customModule="CustomMapAnnotation_ViewNibs_bundle" customModuleProvider="target">
             <connections>
                 <outlet property="annotBackground" destination="jeo-mW-TMo" id="Mwp-yI-DFn"/>
                 <outlet property="annotImage" destination="aWO-ho-mx8" id="tfj-EM-hja"/>
@@ -22,14 +26,14 @@
             <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_annot1.png" translatesAutoresizingMaskIntoConstraints="NO" id="jeo-mW-TMo">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="jeo-mW-TMo">
                     <rect key="frame" x="0.0" y="0.0" width="36" height="36"/>
                     <color key="tintColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="jeo-mW-TMo" secondAttribute="height" multiplier="1:1" id="dEX-ZW-9ov"/>
                     </constraints>
                 </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_charging.png" translatesAutoresizingMaskIntoConstraints="NO" id="aWO-ho-mx8">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="aWO-ho-mx8">
                     <rect key="frame" x="8" y="5" width="20" height="20"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="aWO-ho-mx8" secondAttribute="height" multiplier="1:1" id="wdN-5W-Sz4"/>
@@ -54,8 +58,4 @@
             <point key="canvasLocation" x="544" y="-242"/>
         </view>
     </objects>
-    <resources>
-        <image name="ic_annot1.png" width="32" height="32"/>
-        <image name="ic_charging.png" width="32" height="32"/>
-    </resources>
 </document>
