@@ -7,10 +7,26 @@
 //
 
 import UIKit
+import Foundation
 
 open class CMAResManager {
     
     private static let LOG_TAG = "[CustomMapAnnotation ResManager] "
+    
+    public enum CMABundle: String {
+        case viewNibs = "CustomMapAnnotation-ViewNibs"
+        case resources = "CustomMapAnnotation-Resources"
+    }
+    
+    /**
+     Get resource bundles for the framework
+     */
+    public static func getBundle(bundleType: CMABundle) -> Bundle {
+        let podBundle = Bundle(for: CMAResManager.self)
+        let bundleURL = podBundle.url(forResource: bundleType.rawValue, withExtension: "bundle")
+        
+        return Bundle(url: bundleURL!)!
+    }
     
     /**
      Get annotation view foreground image.
@@ -21,15 +37,15 @@ open class CMAResManager {
      */
     public static func getAnnotImage(_ annotImage: StyledAnnotationView.AnnotationImage) -> UIImage {
         switch annotImage {
-        case .error: return UIImage(named: "ic_error")!
-        case .police: return UIImage(named: "ic_police")!
-        case .hazard: return UIImage(named: "ic_hazard")!
-        case .construction: return UIImage(named: "ic_constr")!
-        case .crash: return UIImage(named: "ic_crash")!
-        case .multiUser: return UIImage(named: "ic_public")!
-        case .personal: return UIImage(named: "ic_personal")!
-        case .gas: return UIImage(named: "ic_gas")!
-        case .charging: return UIImage(named: "ic_charging")!
+        case .error: return UIImage.make(named: "ic_error")!
+        case .police: return UIImage.make(named: "ic_police")!
+        case .hazard: return UIImage.make(named: "ic_hazard")!
+        case .construction: return UIImage.make(named: "ic_constr")!
+        case .crash: return UIImage.make(named: "ic_crash")!
+        case .multiUser: return UIImage.make(named: "ic_public")!
+        case .personal: return UIImage.make(named: "ic_personal")!
+        case .gas: return UIImage.make(named: "ic_gas")!
+        case .charging: return UIImage.make(named: "ic_charging")!
         }
     }
     
@@ -42,11 +58,11 @@ open class CMAResManager {
      */
     public static func getBgImage(_ annotImage: StyledAnnotationView.BackgroundImage) -> UIImage {
         switch annotImage {
-        case .bubble: return UIImage(named: "ic_annot1")!
-        case .square: return UIImage(named: "ic_annot2")!
-        case .circle: return UIImage(named: "ic_annot3")!
-        case .heart: return UIImage(named: "ic_annot4")!
-        case .flag: return UIImage(named: "ic_annot5")!
+        case .bubble: return UIImage.make(named: "ic_annot1")!
+        case .square: return UIImage.make(named: "ic_annot2")!
+        case .circle: return UIImage.make(named: "ic_annot3")!
+        case .heart: return UIImage.make(named: "ic_annot4")!
+        case .flag: return UIImage.make(named: "ic_annot5")!
         }
     }
     
@@ -59,12 +75,12 @@ open class CMAResManager {
      */
     public static func getActionSheetImage(_ actionSheetImg: ActionSheetButtonImg) -> UIImage {
         switch actionSheetImg {
-        case .like: return UIImage(named: "ic_like")!
-        case .dislike: return UIImage(named: "ic_dislike")!
-        case .stop: return UIImage(named: "ic_stop")!
-        case .pause: return UIImage(named: "ic_pause")!
-        case .play: return UIImage(named: "ic_play")!
-        case .record: return UIImage(named: "ic_record")!
+        case .like: return UIImage.make(named: "ic_like")!
+        case .dislike: return UIImage.make(named: "ic_dislike")!
+        case .stop: return UIImage.make(named: "ic_stop")!
+        case .pause: return UIImage.make(named: "ic_pause")!
+        case .play: return UIImage.make(named: "ic_play")!
+        case .record: return UIImage.make(named: "ic_record")!
         }
     }
     

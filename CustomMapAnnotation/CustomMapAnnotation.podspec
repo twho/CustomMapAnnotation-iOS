@@ -105,7 +105,8 @@ Pod::Spec.new do |s|
   # s.resource  = "icon.png"
   # s.resources = "Resources/*.png"
   s.resource_bundles = {
-    'mlres' => ['CustomMapAnnotation/CustomMapAnnotation/Resources/**']
+    'CustomMapAnnotation-Resources.bundle' => ['CustomMapAnnotation/CustomMapAnnotation/Resources/**'],
+    'CustomMapAnnotation-ViewNibs.bundle' => ['CustomMapAnnotation/CustomMapAnnotation/ViewNibs/**']
   }
 
   # s.preserve_paths = "FilesToSave", "MoreFilesToSave"

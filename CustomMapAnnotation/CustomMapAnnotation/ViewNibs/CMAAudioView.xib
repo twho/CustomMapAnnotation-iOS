@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" userLabel="Audio Editor View" customClass="AudioView" customModule="LocationAudioMessage" customModuleProvider="target">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AudioView" customModule="CustomMapAnnotation" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="414" height="208"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -32,36 +32,36 @@
                         <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="j0C-xv-bF5">
                             <rect key="frame" x="0.0" y="0.0" width="334" height="95.666666666666671"/>
                             <subviews>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xw-N1-VEp" customClass="ActionSheetButton" customModule="LocationAudioMessage" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5xw-N1-VEp" customClass="ActionSheetButton" customModule="CustomMapAnnotation" customModuleProvider="target">
                                     <rect key="frame" x="0.0" y="0.0" width="95.666666666666671" height="95.666666666666671"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="5xw-N1-VEp" secondAttribute="height" multiplier="1:1" id="8fN-MN-R37"/>
                                     </constraints>
-                                    <state key="normal" image="ic_stop"/>
+                                    <state key="normal" image="ic_stop.png"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
                                             <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSl-tf-2fn" customClass="ActionSheetButton" customModule="LocationAudioMessage" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LSl-tf-2fn" customClass="ActionSheetButton" customModule="CustomMapAnnotation" customModuleProvider="target">
                                     <rect key="frame" x="119.66666666666666" y="0.0" width="95" height="95.666666666666671"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="LSl-tf-2fn" secondAttribute="height" multiplier="1:1" id="Beg-wl-bCW"/>
                                     </constraints>
-                                    <state key="normal" image="ic_play"/>
+                                    <state key="normal" image="ic_play.png"/>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="errorColor">
                                             <color key="value" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         </userDefinedRuntimeAttribute>
                                     </userDefinedRuntimeAttributes>
                                 </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIX-g7-qHJ" customClass="ActionSheetButton" customModule="LocationAudioMessage" customModuleProvider="target">
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eIX-g7-qHJ" customClass="ActionSheetButton" customModule="CustomMapAnnotation" customModuleProvider="target">
                                     <rect key="frame" x="238.66666666666671" y="0.0" width="95.333333333333343" height="95.666666666666671"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="eIX-g7-qHJ" secondAttribute="height" multiplier="1:1" id="YuA-Nv-XJx"/>
                                     </constraints>
-                                    <state key="normal" image="ic_record">
+                                    <state key="normal" image="ic_record.png">
                                         <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     </state>
                                     <userDefinedRuntimeAttributes>
@@ -106,8 +106,8 @@
         </view>
     </objects>
     <resources>
-        <image name="ic_play" width="42" height="42"/>
-        <image name="ic_record" width="42" height="42"/>
-        <image name="ic_stop" width="42" height="42"/>
+        <image name="ic_play.png" width="32" height="32"/>
+        <image name="ic_record.png" width="32" height="32"/>
+        <image name="ic_stop.png" width="32" height="32"/>
     </resources>
 </document>

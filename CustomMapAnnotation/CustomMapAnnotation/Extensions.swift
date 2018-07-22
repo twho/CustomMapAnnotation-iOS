@@ -97,6 +97,18 @@ extension UIImage {
         
         return self
     }
+    
+    /**
+     Load images from bundle class.
+     
+     - Parameters:
+        - name: Image full name.
+     - loadClass: The class bundle.
+     */
+    public static func make(named: String) -> UIImage? {
+        let bundle = CMAResManager.getBundle(bundleType: .resources)
+        return UIImage(named: CMAResManager.CMABundle.resources.rawValue + "/\(named)", in: bundle, compatibleWith: nil)
+    }
 }
 
 // MARK: - UIButton

@@ -54,7 +54,7 @@ open class StyledAnnotationView: UIView {
      Configure for the StyledAnnotationView.
      */
     private func configure() {
-        Bundle.main.loadNibNamed("StyledAnnotationView", owner: self, options: nil)
+        CMAResManager.getBundle(bundleType: .viewNibs).loadNibNamed("StyledAnnotationView", owner: self, options: nil)
         addSubview(contentView)
         contentView.frame = self.bounds
         contentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
