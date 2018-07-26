@@ -9,25 +9,6 @@
 import UIKit
 import AVFoundation
 
-/**
- Built-in action sheet button images.
- 
- - like:    like image
- - dislike: dislike image
- - play:    audio play button image
- - stop:    audio stop button image
- - pause:   audio pause button image
- - record:  audio record button image
- */
-public enum ActionSheetButtonImg {
-    case like
-    case dislike
-    case play
-    case stop
-    case pause
-    case record
-}
-
 // MARK: - AudioView
 open class AudioView: UIView {
     
@@ -105,9 +86,9 @@ open class AudioView: UIView {
         buttons = [btnPlay, btnStop, btnRecord]
         
         // Set image resource
-        btnPlay.setImageForAllState(image: CMAResManager.getActionSheetImage(.play))
-        btnStop.setImageForAllState(image: CMAResManager.getActionSheetImage(.stop))
-        btnRecord.setImageForAllState(image: CMAResManager.getActionSheetImage(.record))
+        btnPlay.setImageForAllState(image: CMAResManager.ActionSheetBtnImg.play.image)
+        btnStop.setImageForAllState(image: CMAResManager.ActionSheetBtnImg.stop.image)
+        btnRecord.setImageForAllState(image: CMAResManager.ActionSheetBtnImg.record.image)
     }
     
     /**
@@ -165,7 +146,7 @@ open class AudioView: UIView {
      */
     @objc func onClickBtnPlay() {
         if nil != audioPlayer && (audioPlayer?.isPlaying)! {
-            btnPlay.setImageForAllState(image: CMAResManager.getActionSheetImage(.play))
+            btnPlay.setImageForAllState(image: CMAResManager.ActionSheetBtnImg.play.image)
             audioPlayer?.pause()
         } else {
             btnPlay.isLoading = true
@@ -186,7 +167,7 @@ open class AudioView: UIView {
     public func playAudio(resource: Any) {
         // Setup GUIs before playing audio
         btnRecord.isEnabled = false
-        btnPlay.setImage(CMAResManager.getActionSheetImage(.pause), for: UIControlState())
+        btnPlay.setImageForAllState(image: CMAResManager.ActionSheetBtnImg.pause.image)
         btnPlay.isLoading = false
         
         do {
@@ -215,7 +196,7 @@ open class AudioView: UIView {
             audioPlayer = nil
         }
         
-        btnPlay.setImage(CMAResManager.getActionSheetImage(.play), for: UIControlState())
+        btnPlay.setImageForAllState(image: CMAResManager.ActionSheetBtnImg.play.image)
     }
     
     /**
@@ -281,7 +262,7 @@ open class AudioView: UIView {
 extension AudioView: AVAudioPlayerDelegate {
     public func audioPlayerDidFinishPlaying(_ player: AVAudioPlayer, successfully flag: Bool) {
         audioPlayer = nil // Clean up
-        btnPlay.setImageForAllState(image: CMAResManager.getActionSheetImage(.play))
+        btnPlay.setImageForAllState(image: CMAResManager.ActionSheetBtnImg.play.image)
         btnRecord.isEnabled = onClickRecord != nil
     }
 }
@@ -317,7 +298,7 @@ open class InfoView: UIView {
     /**
      A tuple of like button image. Configurable from external.
      */
-    public var btnLikeImage = (isLiked: CMAResManager.getActionSheetImage(.like), notLiked: CMAResManager.getActionSheetImage(.dislike))
+    public var btnLikeImage = (isLiked: CMAResManager.ActionSheetBtnImg.like.image, notLiked: CMAResManager.ActionSheetBtnImg.dislike.image)
     
     /**
      Type alias of input external function or logic
