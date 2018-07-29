@@ -96,7 +96,7 @@ open class StyledAnnotationView: UIView {
      - Paramter background: the BackgroundImage type of the background image
      - Paramter bgColor:    the color of the background image. Set nil to use default color
      */
-    public convenience init(annotImg: CMAResManager.annotImg, color: UIColor?, background: CMAResManager.BgImg, bgColor: UIColor?) {
+    public convenience init(annotImg: CMAResManager.annotImg, color: UIColor? = nil, background: CMAResManager.BgImg, bgColor: UIColor? = nil) {
         self.init(annotImg: annotImg.image, color: color, background: background.image, bgColor: bgColor)
         customConstraints(bgType: background)
     }
@@ -109,7 +109,7 @@ open class StyledAnnotationView: UIView {
      - Paramter background: the BackgroundImage type of the background image
      - Paramter bgColor:    the color of the background image. Set nil to use default color
      */
-    public convenience init(annotImg: UIImage, color: UIColor?, background: CMAResManager.BgImg, bgColor: UIColor?) {
+    public convenience init(annotImg: UIImage, color: UIColor? = nil, background: CMAResManager.BgImg, bgColor: UIColor? = nil) {
         self.init(annotImg: annotImg, color: color, background: background.image, bgColor: bgColor)
         customConstraints(bgType: background)
     }
@@ -122,19 +122,8 @@ open class StyledAnnotationView: UIView {
      - Paramter background: the background image of the annotation view
      - Paramter bgColor:    the color of the background image. Set nil to use default color
      */
-    public convenience init(annotImg: CMAResManager.annotImg, color: UIColor?, background: UIImage, bgColor: UIColor?) {
+    public convenience init(annotImg: CMAResManager.annotImg, color: UIColor? = nil, background: UIImage, bgColor: UIColor? = nil) {
         self.init(annotImg: annotImg.image, color: color, background: background, bgColor: bgColor)
-    }
-    
-    /**
-     Initializer for setting built-in foreground and background images without specifying colors.
-     
-     - Paramter image:      the AnnotationImage type of the foreground image
-     - Paramter background: the BackgroundImage type of the background image
-     */
-    public convenience init(annotImg: CMAResManager.annotImg, background: CMAResManager.BgImg) {
-        self.init(annotImg: annotImg.image, color: nil, background: background.image, bgColor: nil)
-        customConstraints(bgType: background)
     }
     
     /**
@@ -153,9 +142,9 @@ open class StyledAnnotationView: UIView {
      - Parameter bgType: the BackgroundImage type of the background image
      */
     private func customConstraints(bgType: CMAResManager.BgImg) {
-        annotImgTopConstraint.constant = bgType == .heart ? 5.0 : 6.0
-        annotImgLeftConstraint.constant = bgType == .heart ? 10.0 : 8.0
-        annotImgRightConstraint.constant = bgType == .heart ? 10.0 : 8.0
+        annotImgTopConstraint.constant = (bgType == .heart || bgType == .circle)  ? 5.0 : 6.0
+        annotImgLeftConstraint.constant = bgType == .heart ? 9.0 : 8.0
+        annotImgRightConstraint.constant = bgType == .heart ? 9.0 : 8.0
         self.layoutIfNeeded()
     }
     
@@ -164,13 +153,14 @@ open class StyledAnnotationView: UIView {
      
      - Returns nil or an UIImage converted from UIView
      */
-    public func toImage() -> UIImage? {
+    public func toImage() -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 0.0)
         defer { UIGraphicsEndImageContext() }
         if let context = UIGraphicsGetCurrentContext() {
             self.layer.render(in: context)
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            return image
+            if let image = UIGraphicsGetImageFromCurrentImageContext() {
+                return image
+            }
         }
         
         self.annotImage.image = CMAResManager.annotImg.error.image

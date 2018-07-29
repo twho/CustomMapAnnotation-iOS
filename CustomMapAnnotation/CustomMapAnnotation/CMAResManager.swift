@@ -23,9 +23,11 @@ open class CMAResManager {
      */
     public static func getBundle(bundleType: CMABundle) -> Bundle {
         let podBundle = Bundle(for: CMAResManager.self)
-        let bundleURL = podBundle.resourceURL?.appendingPathComponent(bundleType.rawValue)
-        
-        return Bundle(url: bundleURL!)!
+        if let bundleURL = podBundle.resourceURL?.appendingPathComponent(bundleType.rawValue), let bundle = Bundle(url: bundleURL) {
+            return bundle
+        } else {
+            return Bundle.main
+        }
     }
     
     /**
@@ -177,10 +179,10 @@ open class CMAResManager {
      Get a set of colors by theme.
      
      - Parameters:
-        - theme:       The Theme of the action sheet.
-        - bgColor:     The background color of the action sheet.
-        - textColor:   The text color of the entire action sheet.
-        - topBarColor: The background color of the top bar.
+     - theme:       The Theme of the action sheet.
+     - bgColor:     The background color of the action sheet.
+     - textColor:   The text color of the entire action sheet.
+     - topBarColor: The background color of the top bar.
      */
     public static func getColorByTheme(theme: Theme, bgColor: UIColor? = nil, textColor: UIColor? = nil, topBarColor: UIColor? = nil) -> (textColor: UIColor, TopBarColor: UIColor, bgColor: (color: UIColor, tint: UIColor)) {
         var themeColors = ThemeColor.light
