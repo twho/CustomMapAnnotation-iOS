@@ -23,65 +23,116 @@ open class CMAResManager {
      */
     public static func getBundle(bundleType: CMABundle) -> Bundle {
         let podBundle = Bundle(for: CMAResManager.self)
-//        let bundleURL = podBundle.url(forResource: bundleType.rawValue, withExtension: "bundle")
-        let bundleURL = podBundle.resourceURL?.appendingPathComponent(bundleType.rawValue)
+        if let bundleURL = podBundle.resourceURL?.appendingPathComponent(bundleType.rawValue), let bundle = Bundle(url: bundleURL) {
+            return bundle
+        } else {
+            return Bundle.main
+        }
+    }
+    
+    /**
+     Built-in annotation images.
+     
+     - error:        error image
+     - police:       police image
+     - hazard:       road hazard image
+     - construction: road under construction image
+     */
+    public enum annotImg {
+        case error
+        case police
+        case hazard
+        case construction
+        case crash
+        case multiUser
+        case personal
+        case gas
+        case charging
         
-        return Bundle(url: bundleURL!)!
-    }
-    
-    /**
-     Get annotation view foreground image.
-     
-     - Parameter annotImage: the built-in resources of foreground annotation image
-     
-     Returns a UIImage from built-in resource
-     */
-    public static func getAnnotImage(_ annotImage: StyledAnnotationView.AnnotationImage) -> UIImage {
-        switch annotImage {
-        case .error: return UIImage.make(named: "ic_error")!
-        case .police: return UIImage.make(named: "ic_police")!
-        case .hazard: return UIImage.make(named: "ic_hazard")!
-        case .construction: return UIImage.make(named: "ic_constr")!
-        case .crash: return UIImage.make(named: "ic_crash")!
-        case .multiUser: return UIImage.make(named: "ic_public")!
-        case .personal: return UIImage.make(named: "ic_personal")!
-        case .gas: return UIImage.make(named: "ic_gas")!
-        case .charging: return UIImage.make(named: "ic_charging")!
+        /**
+         Get annotation view foreground image.
+         
+         Returns an UIImage from built-in resource
+         */
+        var image: UIImage {
+            switch self {
+            case .error: return UIImage.make(named: "ic_error")!
+            case .police: return UIImage.make(named: "ic_police")!
+            case .hazard: return UIImage.make(named: "ic_hazard")!
+            case .construction: return UIImage.make(named: "ic_constr")!
+            case .crash: return UIImage.make(named: "ic_crash")!
+            case .multiUser: return UIImage.make(named: "ic_public")!
+            case .personal: return UIImage.make(named: "ic_personal")!
+            case .gas: return UIImage.make(named: "ic_gas")!
+            case .charging: return UIImage.make(named: "ic_charging")!
+            }
         }
     }
     
     /**
-     Get annotation view background image.
+     Built-in background images.
      
-     - Parameter annotImage: the built-in resources of background annotation image
-     
-     Returns a UIImage from built-in resource
+     - bubble: bubble background
+     - square: square-shaped background
+     - circle: circular background
+     - heart:  heart-shaped background
+     - flag:   flag background
      */
-    public static func getBgImage(_ annotImage: StyledAnnotationView.BackgroundImage) -> UIImage {
-        switch annotImage {
-        case .bubble: return UIImage.make(named: "ic_annot1")!
-        case .square: return UIImage.make(named: "ic_annot2")!
-        case .circle: return UIImage.make(named: "ic_annot3")!
-        case .heart: return UIImage.make(named: "ic_annot4")!
-        case .flag: return UIImage.make(named: "ic_annot5")!
+    public enum BgImg {
+        case bubble
+        case square
+        case circle
+        case heart
+        case flag
+        
+        /**
+         Get annotation view background image.
+         
+         Returns a UIImage from built-in resource
+         */
+        var image: UIImage {
+            switch self {
+            case .bubble: return UIImage.make(named: "ic_annot1")!
+            case .square: return UIImage.make(named: "ic_annot2")!
+            case .circle: return UIImage.make(named: "ic_annot3")!
+            case .heart: return UIImage.make(named: "ic_annot4")!
+            case .flag: return UIImage.make(named: "ic_annot5")!
+            }
         }
     }
     
     /**
-     Get action sheet view image.
+     Built-in action sheet button images.
      
-     - Parameter actionSheetImg: the built-in resources of background annotation image
-     
-     Returns a UIImage from built-in resource
+     - like:    like image
+     - dislike: dislike image
+     - play:    audio play button image
+     - stop:    audio stop button image
+     - pause:   audio pause button image
+     - record:  audio record button image
      */
-    public static func getActionSheetImage(_ actionSheetImg: ActionSheetButtonImg) -> UIImage {
-        switch actionSheetImg {
-        case .like: return UIImage.make(named: "ic_like")!
-        case .dislike: return UIImage.make(named: "ic_dislike")!
-        case .stop: return UIImage.make(named: "ic_stop")!
-        case .pause: return UIImage.make(named: "ic_pause")!
-        case .play: return UIImage.make(named: "ic_play")!
-        case .record: return UIImage.make(named: "ic_record")!
+    public enum ActionSheetBtnImg {
+        case like
+        case dislike
+        case play
+        case stop
+        case pause
+        case record
+        
+        /**
+         Get action sheet view image.
+         
+         Returns a UIImage from built-in resource
+         */
+        var image: UIImage {
+            switch self {
+            case .like: return UIImage.make(named: "ic_like")!
+            case .dislike: return UIImage.make(named: "ic_dislike")!
+            case .stop: return UIImage.make(named: "ic_stop")!
+            case .pause: return UIImage.make(named: "ic_pause")!
+            case .play: return UIImage.make(named: "ic_play")!
+            case .record: return UIImage.make(named: "ic_record")!
+            }
         }
     }
     
@@ -128,10 +179,10 @@ open class CMAResManager {
      Get a set of colors by theme.
      
      - Parameters:
-        - theme:       The Theme of the action sheet.
-        - bgColor:     The background color of the action sheet.
-        - textColor:   The text color of the entire action sheet.
-        - topBarColor: The background color of the top bar.
+     - theme:       The Theme of the action sheet.
+     - bgColor:     The background color of the action sheet.
+     - textColor:   The text color of the entire action sheet.
+     - topBarColor: The background color of the top bar.
      */
     public static func getColorByTheme(theme: Theme, bgColor: UIColor? = nil, textColor: UIColor? = nil, topBarColor: UIColor? = nil) -> (textColor: UIColor, TopBarColor: UIColor, bgColor: (color: UIColor, tint: UIColor)) {
         var themeColors = ThemeColor.light

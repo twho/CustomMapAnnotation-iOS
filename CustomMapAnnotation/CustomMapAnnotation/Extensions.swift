@@ -51,28 +51,13 @@ extension UIImage {
         
         return  UIImage(cgImage: outputImage.cgImage!, scale: scale, orientation: UIImageOrientation.up)
     }
-}
-
-// MARK: - UIImageView
-extension UIImageView {
-    /**
-     Change the color of the image.
-     
-     - Parameter color: The color to be set to the UIImageView.
-     */
-    public func colored(color: UIColor?) {
-        guard let color = color else { return }
-        self.image = self.image!.withRenderingMode(.alwaysTemplate)
-        self.tintColor = color
-    }
-}
-
-// MARK: - UIImage
-extension UIImage {
+    
     /**
      Change the color of the image.
      
      - Parameter color: The color to be set to the UIImage.
+     
+     Returns an UIImage with specified color
      */
     public func colored(color: UIColor?) -> UIImage? {
         if let newColor = color {
@@ -102,13 +87,27 @@ extension UIImage {
      Load images from bundle class.
      
      - Parameters:
-        - name: Image full name.
-     - loadClass: The class bundle.
+     - name: Image full name.
+     
+     Returns an image loaded as UIImage or nil
      */
     public static func make(named: String) -> UIImage? {
         let bundle = CMAResManager.getBundle(bundleType: .resources)
-//        return UIImage(named: CMAResManager.CMABundle.resources.rawValue + "/\(named)", in: bundle, compatibleWith: nil)
         return UIImage(named: "\(named)", in: bundle, compatibleWith: nil)
+    }
+}
+
+// MARK: - UIImageView
+extension UIImageView {
+    /**
+     Change the color of the image.
+     
+     - Parameter color: The color to be set to the UIImageView.
+     */
+    public func colored(color: UIColor?) {
+        guard let color = color else { return }
+        self.image = self.image!.withRenderingMode(.alwaysTemplate)
+        self.tintColor = color
     }
 }
 
@@ -138,6 +137,17 @@ extension UIButton {
         self.setTitleColor(titleColor.1, for: .highlighted)
         self.setBackgroundImage(UIImage(color: bgColor.0), for: .normal)
         self.setBackgroundImage(UIImage(color: bgColor.1), for: .highlighted)
+    }
+    
+    /**
+     Set button image for all button states
+     
+     - Parameter image: the image to be set to the button.
+     */
+    public func setImageForAllState(image: UIImage){
+        for state: UIControlState in [.normal, .highlighted, .disabled, .selected, .focused, .application, .reserved] {
+            self.setImage(image, for: state)
+        }
     }
 }
 
@@ -225,21 +235,6 @@ extension UIColor {
             return UIColor.darkGray
         } else {
             return UIColor.white
-        }
-    }
-}
-
-// MARK: - UIButton
-extension UIButton {
-    
-    /**
-     Set button image for all button states
-     
-     - Parameter image: the image to be set to the button.
-     */
-    public func setImageForAllState(image: UIImage){
-        for state: UIControlState in [.normal, .highlighted, .disabled, .selected, .focused, .application, .reserved] {
-            self.setImage(image, for: state)
         }
     }
 }

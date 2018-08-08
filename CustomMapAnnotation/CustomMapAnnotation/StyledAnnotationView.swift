@@ -75,10 +75,10 @@ open class StyledAnnotationView: UIView {
      - Paramter background: the background image of the annotation view
      - Paramter bgColor:    the color of the background image. Set nil to use default color
      */
-    public convenience init(image: UIImage, color: UIColor?, background: UIImage, bgColor: UIColor?) {
+    public convenience init(annotImg: UIImage, color: UIColor?, background: UIImage, bgColor: UIColor?) {
         self.init(frame: CGRect(x: 0, y: 0, width: 36, height: 36))
         
-        annotImage.image = image
+        annotImage.image = annotImg
         annotImage.colored(color: color)
         annotBackground.image = background
         
@@ -96,8 +96,8 @@ open class StyledAnnotationView: UIView {
      - Paramter background: the BackgroundImage type of the background image
      - Paramter bgColor:    the color of the background image. Set nil to use default color
      */
-    public convenience init(image: AnnotationImage, color: UIColor?, background: BackgroundImage, bgColor: UIColor?) {
-        self.init(image: CMAResManager.getAnnotImage(image), color: color, background: CMAResManager.getBgImage(background), bgColor: bgColor)
+    public convenience init(annotImg: CMAResManager.annotImg, color: UIColor? = nil, background: CMAResManager.BgImg, bgColor: UIColor? = nil) {
+        self.init(annotImg: annotImg.image, color: color, background: background.image, bgColor: bgColor)
         customConstraints(bgType: background)
     }
     
@@ -109,8 +109,8 @@ open class StyledAnnotationView: UIView {
      - Paramter background: the BackgroundImage type of the background image
      - Paramter bgColor:    the color of the background image. Set nil to use default color
      */
-    public convenience init(image: UIImage, color: UIColor?, background: BackgroundImage, bgColor: UIColor?) {
-        self.init(image: image, color: color, background: CMAResManager.getBgImage(background), bgColor: bgColor)
+    public convenience init(annotImg: UIImage, color: UIColor? = nil, background: CMAResManager.BgImg, bgColor: UIColor? = nil) {
+        self.init(annotImg: annotImg, color: color, background: background.image, bgColor: bgColor)
         customConstraints(bgType: background)
     }
     
@@ -122,19 +122,8 @@ open class StyledAnnotationView: UIView {
      - Paramter background: the background image of the annotation view
      - Paramter bgColor:    the color of the background image. Set nil to use default color
      */
-    public convenience init(image: AnnotationImage, color: UIColor?, background: UIImage, bgColor: UIColor?) {
-        self.init(image: CMAResManager.getAnnotImage(image), color: color, background: background, bgColor: bgColor)
-    }
-    
-    /**
-     Initializer for setting built-in foreground and background images without specifying colors.
-     
-     - Paramter image:      the AnnotationImage type of the foreground image
-     - Paramter background: the BackgroundImage type of the background image
-     */
-    public convenience init(image: AnnotationImage, background: BackgroundImage) {
-        self.init(image: CMAResManager.getAnnotImage(image), color: nil, background: CMAResManager.getBgImage(background), bgColor: nil)
-        customConstraints(bgType: background)
+    public convenience init(annotImg: CMAResManager.annotImg, color: UIColor? = nil, background: UIImage, bgColor: UIColor? = nil) {
+        self.init(annotImg: annotImg.image, color: color, background: background, bgColor: bgColor)
     }
     
     /**
@@ -143,8 +132,8 @@ open class StyledAnnotationView: UIView {
      - Paramter image:      the foreground image of the annotation view
      - Paramter background: the background image of the annotation view
      */
-    public convenience init(image: UIImage, background: UIImage) {
-        self.init(image: image, color: nil, background: background, bgColor: nil)
+    public convenience init(annotImg: UIImage, background: UIImage) {
+        self.init(annotImg: annotImg, color: nil, background: background, bgColor: nil)
     }
     
     /**
@@ -152,10 +141,10 @@ open class StyledAnnotationView: UIView {
      
      - Parameter bgType: the BackgroundImage type of the background image
      */
-    private func customConstraints(bgType: BackgroundImage) {
-        annotImgTopConstraint.constant = bgType == .heart ? 5.0 : 6.0
-        annotImgLeftConstraint.constant = bgType == .heart ? 10.0 : 8.0
-        annotImgRightConstraint.constant = bgType == .heart ? 10.0 : 8.0
+    private func customConstraints(bgType: CMAResManager.BgImg) {
+        annotImgTopConstraint.constant = (bgType == .heart || bgType == .circle)  ? 5.0 : 6.0
+        annotImgLeftConstraint.constant = bgType == .heart ? 9.0 : 8.0
+        annotImgRightConstraint.constant = bgType == .heart ? 9.0 : 8.0
         self.layoutIfNeeded()
     }
     
@@ -164,58 +153,18 @@ open class StyledAnnotationView: UIView {
      
      - Returns nil or an UIImage converted from UIView
      */
-    public func toImage() -> UIImage? {
+    public func toImage() -> UIImage {
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 0.0)
         defer { UIGraphicsEndImageContext() }
         if let context = UIGraphicsGetCurrentContext() {
             self.layer.render(in: context)
-            let image = UIGraphicsGetImageFromCurrentImageContext()
-            return image
+            if let image = UIGraphicsGetImageFromCurrentImageContext() {
+                return image
+            }
         }
         
-        self.annotImage.image = CMAResManager.getAnnotImage(.error)
+        self.annotImage.image = CMAResManager.annotImg.error.image
         self.backgroundColor = UIColor.red
         return self.toImage()
-    }
-}
-
-// MARK: Built-in image resources
-extension StyledAnnotationView {
-
-    /**
-     Built-in annotation images.
-     
-     - error:        error image
-     - police:       police image
-     - hazard:       road hazard image
-     - construction: road under construction image
-     */
-    public enum AnnotationImage {
-        case error
-        case police
-        case hazard
-        case construction
-        case crash
-        case multiUser
-        case personal
-        case gas
-        case charging
-    }
-    
-    /**
-     Built-in background images.
-     
-     - bubble: bubble background
-     - square: square-shaped background
-     - circle: circular background
-     - heart:  heart-shaped background
-     - flag:   flag background
-     */
-    public enum BackgroundImage {
-        case bubble
-        case square
-        case circle
-        case heart
-        case flag
     }
 }
