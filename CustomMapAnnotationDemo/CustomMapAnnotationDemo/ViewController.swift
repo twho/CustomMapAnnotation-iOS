@@ -15,6 +15,9 @@ class ViewController: UIViewController {
     
     var mapView: MKMapView!
     
+    /**
+     Sample geo points
+     */
     let geoCenter = (lat: 42.35619599, lng: -71.05957196)
     let geoPoint1 = (lat: 42.35273449, lng: -71.05580791)
     let geoPoint2 = (lat: 42.35307061, lng: -71.06350985)
@@ -23,6 +26,8 @@ class ViewController: UIViewController {
     let geoPoint5 = (lat: 42.36326194, lng: -71.05080375)
     let geoPoint6 = (lat: 42.34798343, lng: -71.05960375)
     
+    /**
+     */
     let annotImg1 = StyledAnnotationView(annotImg: .gas, background: .square).toImage()
     let annotImg2 = StyledAnnotationView(annotImg: .police, background: .heart).toImage()
     let annotImg3 = StyledAnnotationView(annotImg: .hazard, background: .bubble).toImage()
@@ -31,21 +36,26 @@ class ViewController: UIViewController {
     let annotImg6 = StyledAnnotationView(annotImg: .hazard, background: .square, bgColor: UIColor.red).toImage()
     let annotImg7 = StyledAnnotationView(annotImg: .construction, color: UIColor.black, background: .flag, bgColor: UIColor.yellow).toImage()
     
+    /**
+     Declare a styled map annotation yourself
+     */
     let yourAnnot = StyledAnnotationView(annotImg: UIImage(), background: UIImage()).toImage()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Init mapView
         mapView = MKMapView()
         mapView.isZoomEnabled = true
         mapView.delegate = self
         mapView.showsScale = true
-        
         self.view.insertSubview(mapView, at: 0)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        // Layout mapView
         mapView.frame = self.view.frame
     }
     
@@ -57,16 +67,20 @@ class ViewController: UIViewController {
         let region = MKCoordinateRegion(center: coordinate, span: MKCoordinateSpan(latitudeDelta: 0.03, longitudeDelta: 0.03))
         mapView.setRegion(region, animated: true)
         
+        // Sample location and image set
         let imgSet = [annotImg1, annotImg2, annotImg3, annotImg4, annotImg5, annotImg6, annotImg7]
         let locSet = [geoCenter, geoPoint1, geoPoint2, geoPoint3, geoPoint4, geoPoint5, geoPoint6]
         
-        // Add custom map annotation
+        // Add custom map annotations to map
         for i in 0..<locSet.count {
             let annotation = createAnnotation(annotImg: imgSet[i], loc: locSet[i])
             mapView.addAnnotation(annotation)
         }
     }
     
+    /**
+     Create 
+     */
     func createAnnotation(annotImg: UIImage, loc: (lat: Double, lng: Double)) -> MKAnnotation {
         let annot = CMAAnnotation()
         annot.coordinate = CLLocationCoordinate2D(latitude: loc.lat, longitude: loc.lng)
