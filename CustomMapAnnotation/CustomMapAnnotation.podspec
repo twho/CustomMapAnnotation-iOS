@@ -16,7 +16,7 @@ Pod::Spec.new do |s|
   #
 
   s.name         = "CustomMapAnnotation"
-  s.version      = "0.0.6"
+  s.version      = "0.1.0"
   s.summary      = "Easily creates customized annotation views and callout views."
 
   # This description is used to generate tags and improve search results.
@@ -77,7 +77,7 @@ Pod::Spec.new do |s|
   #  Supports git, hg, bzr, svn and HTTP.
   #
 
-  s.source       = { :git => "https://github.com/twho/CustomMapAnnotation-iOS.git", :tag => "0.0.6" }
+  s.source       = { :git => "https://github.com/twho/CustomMapAnnotation-iOS.git", :tag => "0.1.0" }
 
 
   # ――― Source Code ―――――――――――――――――――――――――――――――――――――――――――――――――――――――――――――― #
@@ -89,7 +89,7 @@ Pod::Spec.new do |s|
   #
 
   s.source_files  = "CustomMapAnnotation", "CustomMapAnnotation/**/*.{swift,h,m}"
-  s.exclude_files = "CustomMapAnnotation/CustomMapAnnotationDemo/**", "CustomMapAnnotation/CustomMapAnnotationTests/**"
+  s.exclude_files = "CustomMapAnnotation/CustomMapAnnotationDemo/**", "CustomMapAnnotation/CustomMapAnnotationTests/**", "CustomMapAnnotationDemo/**"
 
   # s.public_header_files = "Classes/**/*.h"
 
