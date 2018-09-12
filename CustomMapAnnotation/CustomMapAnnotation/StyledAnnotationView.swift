@@ -25,21 +25,6 @@ open class StyledAnnotationView: UIView {
     @IBOutlet weak var annotImage: UIImageView!
     
     /**
-     The top constraint of the foreground image of the annotation view.
-     */
-    @IBOutlet weak var annotImgTopConstraint: NSLayoutConstraint!
-    
-    /**
-     The left constraint of the foreground image of the annotation view.
-     */
-    @IBOutlet weak var annotImgLeftConstraint: NSLayoutConstraint!
-    
-    /**
-     The right constraint of the foreground image of the annotation view.
-     */
-    @IBOutlet weak var annotImgRightConstraint: NSLayoutConstraint!
-    
-    /**
      Background color
      */
     public var bgColor = UIColor(white: 1, alpha: 0.1)
@@ -98,7 +83,6 @@ open class StyledAnnotationView: UIView {
      */
     public convenience init(annotImg: CMAResManager.annotImg, color: UIColor? = nil, background: CMAResManager.BgImg, bgColor: UIColor? = nil) {
         self.init(annotImg: annotImg.image, color: color, background: background.image, bgColor: bgColor)
-        customConstraints(bgType: background)
     }
     
     /**
@@ -111,7 +95,6 @@ open class StyledAnnotationView: UIView {
      */
     public convenience init(annotImg: UIImage, color: UIColor? = nil, background: CMAResManager.BgImg, bgColor: UIColor? = nil) {
         self.init(annotImg: annotImg, color: color, background: background.image, bgColor: bgColor)
-        customConstraints(bgType: background)
     }
     
     /**
@@ -134,18 +117,6 @@ open class StyledAnnotationView: UIView {
      */
     public convenience init(annotImg: UIImage, background: UIImage) {
         self.init(annotImg: annotImg, color: nil, background: background, bgColor: nil)
-    }
-    
-    /**
-     Configure top constraints to react to specfic background images.
-     
-     - Parameter bgType: the BackgroundImage type of the background image
-     */
-    private func customConstraints(bgType: CMAResManager.BgImg) {
-        annotImgTopConstraint.constant = (bgType == .heart || bgType == .circle)  ? 5.0 : 6.0
-        annotImgLeftConstraint.constant = bgType == .heart ? 9.0 : 8.0
-        annotImgRightConstraint.constant = bgType == .heart ? 9.0 : 8.0
-        self.layoutIfNeeded()
     }
     
     /**

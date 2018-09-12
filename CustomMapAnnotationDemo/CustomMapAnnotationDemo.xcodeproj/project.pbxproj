@@ -171,8 +171,8 @@
 		309FD21121096FCD0080DDA7 /* CustomMapAnnotationDemo */ = {
 			isa = PBXGroup;
 			children = (
-				309FD21221096FCD0080DDA7 /* AppDelegate.swift */,
 				309FD21421096FCD0080DDA7 /* ViewController.swift */,
+				309FD21221096FCD0080DDA7 /* AppDelegate.swift */,
 				309FD21621096FCD0080DDA7 /* Main.storyboard */,
 				309FD21921096FCD0080DDA7 /* Assets.xcassets */,
 				309FD21B21096FCD0080DDA7 /* LaunchScreen.storyboard */,

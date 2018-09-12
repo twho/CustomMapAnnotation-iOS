@@ -16,7 +16,7 @@ class ViewController: UIViewController {
     var mapView: MKMapView!
     
     /**
-     Sample geo points
+     Sample geo points.
      */
     let geoCenter = (lat: 42.35619599, lng: -71.05957196)
     let geoPoint1 = (lat: 42.35273449, lng: -71.05580791)
@@ -27,17 +27,18 @@ class ViewController: UIViewController {
     let geoPoint6 = (lat: 42.34798343, lng: -71.05960375)
     
     /**
+     Sample annotation images.
      */
     let annotImg1 = StyledAnnotationView(annotImg: .gas, background: .square).toImage()
     let annotImg2 = StyledAnnotationView(annotImg: .police, background: .heart).toImage()
-    let annotImg3 = StyledAnnotationView(annotImg: .hazard, background: .bubble).toImage()
-    let annotImg4 = StyledAnnotationView(annotImg: .charging, background: .flag).toImage()
+    let annotImg3 = StyledAnnotationView(annotImg: .hazard, color: UIColor.lightGray, background: .bubble, bgColor: UIColor.blue).toImage()
+    let annotImg4 = StyledAnnotationView(annotImg: .charging, background: .flag, bgColor: UIColor.orange).toImage()
     let annotImg5 = StyledAnnotationView(annotImg: .personal, background: .circle, bgColor: UIColor.purple).toImage()
     let annotImg6 = StyledAnnotationView(annotImg: .hazard, background: .square, bgColor: UIColor.red).toImage()
     let annotImg7 = StyledAnnotationView(annotImg: .construction, color: UIColor.black, background: .flag, bgColor: UIColor.yellow).toImage()
     
     /**
-     Declare a styled map annotation yourself
+     Declare a styled map annotation yourself.
      */
     let yourAnnot = StyledAnnotationView(annotImg: UIImage(), background: UIImage()).toImage()
     
@@ -79,7 +80,11 @@ class ViewController: UIViewController {
     }
     
     /**
-     Create 
+     Create map annotation.
+     
+     - Parameters:
+        - annotImg: The image of annotation.
+        - loc:      A tuple with latitude and longitude values.
      */
     func createAnnotation(annotImg: UIImage, loc: (lat: Double, lng: Double)) -> MKAnnotation {
         let annot = CMAAnnotation()
@@ -88,7 +93,14 @@ class ViewController: UIViewController {
         
         return annot
     }
+    
+    func showCalloutView() {
+        
+    }
 
+    /**
+     The types of annotation animation
+     */
     public enum AnnotAnimation {
         case zoomIn
         case zoomOut
@@ -161,6 +173,7 @@ extension ViewController: MKMapViewDelegate {
     
     func mapView(_ mapView: MKMapView, didSelect view: MKAnnotationView) {
         animate(annotations: [view], animation: .zoomIn, duration: 0.3)
+        showCalloutView()
     }
     
     func mapView(_ mapView: MKMapView, didDeselect view: MKAnnotationView) {

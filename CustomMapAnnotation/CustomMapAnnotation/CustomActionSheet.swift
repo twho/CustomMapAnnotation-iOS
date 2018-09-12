@@ -6,6 +6,7 @@
 //  Updatrd by Michael Ho on 7/11/2018.
 //  Copyright 2015 blk. All rights reserved.
 //
+
 import UIKit
 
 /**
@@ -50,11 +51,11 @@ open class CustomActionSheetItem: NSObject {
      Init custom action sheet button.
      
      - Parameters:
-        - height:     The height of the action sheet item
-        - title:      The text of the action sheet item
-        - titleColor: The color of the action sheet item
-        - bgColor:    The background color pair. One for normal state and the other for highlighted state
-        - onClick:    The task to be performed when the button is clicked
+        - height:     The height of the action sheet item.
+        - title:      The text of the action sheet item.
+        - titleColor: The color of the action sheet item.
+        - bgColor:    The background color pair. One for normal state and the other for highlighted state.
+        - onClick:    The task to be performed when the button is clicked.
      */
     public convenience init(height: CGFloat = CustomActionSheetItem.defaultHeight, title: String, titleColor: UIColor?, bgColor: (color: UIColor, tint: UIColor)?, onClick: @escaping ((CustomActionSheet) -> Void)) {
         self.init()
@@ -161,7 +162,16 @@ public class CustomActionSheet: NSObject {
             subview.removeFromSuperview()
         }
         var currentPosition: CGFloat = 0.0
-        var availableHeight = targetBounds.height - marginTop
+        let safeAreaTop: CGFloat
+        let safeAreaBottom: CGFloat
+        if #available(iOS 11.0, *) {
+            safeAreaTop = targetView.safeAreaInsets.top
+            safeAreaBottom = targetView.safeAreaInsets.bottom
+        } else {
+            safeAreaTop = marginTop
+            safeAreaBottom = 0
+        }
+        var availableHeight = targetBounds.height - safeAreaTop - safeAreaBottom
         
         // Calculate height of items
         for item in items {
@@ -219,9 +229,10 @@ public class CustomActionSheet: NSObject {
             
         }
         
+        let positionY: CGFloat = targetBounds.minY + targetBounds.height - currentPosition - safeAreaBottom
         self.itemContainerView.frame = CGRect(
             x: 0,
-            y: targetBounds.height - currentPosition,
+            y: positionY,
             width: targetBounds.width,
             height: currentPosition)
         self.items = items
@@ -230,8 +241,7 @@ public class CustomActionSheet: NSObject {
         self.maskView.alpha = 0
         targetView.addSubview(self.itemContainerView)
         
-        let moveY = targetBounds.height - self.itemContainerView.frame.origin.y
-        self.itemContainerView.transform = CGAffineTransform(translationX: 0, y: moveY)
+        self.itemContainerView.transform = CGAffineTransform(translationX: 0, y: positionY)
         UIView.animate(withDuration: 0.4,
                        delay: 0,
                        usingSpringWithDamping: 0.6,
